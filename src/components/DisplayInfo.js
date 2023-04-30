@@ -16,8 +16,6 @@ class DisplayInfo extends React.Component {
             </div>
           );
         })}
-        {/* <div>My name is {name}</div>
-        <div>My age is {age}</div>} */}
       </div>
     );
   }

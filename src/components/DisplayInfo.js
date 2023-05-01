@@ -11,11 +11,10 @@ class DisplayInfo extends React.Component {
   };
   render() {
     const { listUsers } = this.props;
-    console.table(listUsers);
+    // console.table(listUsers);
 
     return (
       <div className="display-info-container">
-        <img src={logo} alt="logo" />
         <div>
           <span
             onClick={() => {
@@ -29,12 +28,20 @@ class DisplayInfo extends React.Component {
         </div>
         {this.state.isShown && (
           <div>
-            {listUsers.map((user) => {
+            {listUsers.map((user, index) => {
               return (
                 <div key={user.id} className={+user.age > 18 ? "green" : "red"}>
-                  <div>My name is {user.name},</div>
-                  <div>I'm {user.age}</div>
-                  <hr />
+                  <div>
+                    <div>My name is {user.name},</div>
+                    <div>I'm {user.age}</div>
+                  </div>
+                  <div>
+                    <button
+                      onClick={() => this.props.handleDeleteUser(user.id)}
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </div>
               );
             })}

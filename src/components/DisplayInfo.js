@@ -1,15 +1,35 @@
 import React from "react";
 import "./DisplayInfo.scss";
-import logo from "../logo.svg";
+// import logo from "../logo.svg";
 class DisplayInfo extends React.Component {
-  state = {
-    isShown: true,
-  };
+  constructor(props) {
+    console.log("call constructor: 1");
+    super(props);
+    this.state = {
+      isShown: true,
+    };
+  }
+  // babel compiler
+  // state = {
+  //   isShown: true,
+  // };
+
+  componentDidMount() {
+    console.log("call me componentDidMount");
+    setTimeout(() => {
+      document.title = "Hellou";
+    }, 3000);
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    console.log("call me componentDidUpdate");
+  }
 
   handleShowHide = () => {
     this.setState({ isShown: !this.state.isShown });
   };
   render() {
+    console.log("call me render");
     const { listUsers } = this.props;
     // console.table(listUsers);
 

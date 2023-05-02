@@ -5,16 +5,14 @@ import "./App.scss";
 // import { increaseCounter, decreaseCounter } from "./redux/action/counterAction";
 import MyComponent from "./components/MyComponent";
 
-class App extends React.Component {
-  render() {
-    return (
-      <div className="app-container">
-        <p>Hello world with Paul</p>
-        <MyComponent />
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className="app-container">
+      <p>Hello world with Paul</p>
+      <MyComponent />
+    </div>
+  );
+};
 
 // const App = () => {
 //   const count = useSelector((state) => state.counter.count);

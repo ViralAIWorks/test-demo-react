@@ -35,7 +35,7 @@ body {
       color: white;
       height: 40px;
 
-      transition: 0.5s;
+      transition: 0.3s;
 
       &:hover {
         background: black;
@@ -78,8 +78,9 @@ body {
           background: #303030;
           color: white;
           height: 40px;
+          border: none;
 
-          transition: 0.5s;
+          transition: 0.3s;
 
           &:hover {
             background: black;

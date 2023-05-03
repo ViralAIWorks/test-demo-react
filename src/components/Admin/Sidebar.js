@@ -19,6 +19,7 @@ import {
 } from "react-icons/fa";
 import { DiReact } from "react-icons/di";
 import { MdDashboard } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 import "./Sidebar.scss";
 import sidebarBg from "../../assets/bg2.jpg";
@@ -60,6 +61,7 @@ const Sidebar = (props) => {
               // suffix={<span className="badge red">NEW</span>}
             >
               Dashboard
+              <Link to="/admins" />
             </MenuItem>
             {/* <MenuItem icon={<FaGem />}>Components</MenuItem> */}
           </Menu>
@@ -70,7 +72,10 @@ const Sidebar = (props) => {
               icon={<FaGem />}
               title="Features"
             >
-              <MenuItem>Quản lí Users</MenuItem>
+              <MenuItem>
+                Quản lí Users
+                <Link to="/admins/manage-users" />
+              </MenuItem>
               <MenuItem>Quản lí bài Quiz</MenuItem>
               <MenuItem>Quản lí Câu Hỏi</MenuItem>
             </SubMenu>

@@ -35,6 +35,8 @@ body {
       color: white;
       height: 40px;
 
+      transition: 0.5s;
+
       &:hover {
         background: black;
       }
@@ -76,6 +78,8 @@ body {
           background: #303030;
           color: white;
           height: 40px;
+
+          transition: 0.5s;
 
           &:hover {
             background: black;

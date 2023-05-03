@@ -17,6 +17,10 @@ import {
   FaRegLaughWink,
   FaHeart,
 } from "react-icons/fa";
+import { DiReact } from "react-icons/di";
+import { MdDashboard } from "react-icons/md";
+
+import "./Sidebar.scss";
 import sidebarBg from "../../assets/bg2.jpg";
 
 const Sidebar = (props) => {
@@ -44,7 +48,8 @@ const Sidebar = (props) => {
               whiteSpace: "nowrap",
             }}
           >
-            Paul High
+            <DiReact size={"3em"} color={"00bfff"} />
+            <span>Good Learners</span>
           </div>
         </SidebarHeader>
 
@@ -52,20 +57,22 @@ const Sidebar = (props) => {
           <Menu iconShape="circle">
             <MenuItem
               icon={<FaTachometerAlt />}
-              suffix={<span className="badge red">NEW</span>}
+              // suffix={<span className="badge red">NEW</span>}
             >
               Dashboard
             </MenuItem>
-            <MenuItem icon={<FaGem />}>Components</MenuItem>
+            {/* <MenuItem icon={<FaGem />}>Components</MenuItem> */}
           </Menu>
           <Menu iconShape="circle">
             <SubMenu
-              suffix={<span className="badge yellow">3</span>}
-              icon={<FaRegLaughWink />}
+              // suffix={<span className="badge yellow">3</span>}
+              // icon={<FaRegLaughWink />}
+              icon={<FaGem />}
+              title="Features"
             >
-              <MenuItem> 1</MenuItem>
-              <MenuItem> 2</MenuItem>
-              <MenuItem> 3</MenuItem>
+              <MenuItem>Quản lí Users</MenuItem>
+              <MenuItem>Quản lí bài Quiz</MenuItem>
+              <MenuItem>Quản lí Câu Hỏi</MenuItem>
             </SubMenu>
           </Menu>
         </SidebarContent>
@@ -78,7 +85,7 @@ const Sidebar = (props) => {
             }}
           >
             <a
-              href="https://github.com/azouaoui-med/react-pro-sidebar"
+              href="https://github.com/ViralAIWorks/test-demo-react/tree/prod"
               target="_blank"
               className="sidebar-btn"
               rel="noopener noreferrer"
@@ -91,7 +98,7 @@ const Sidebar = (props) => {
                   overflow: "hidden",
                 }}
               >
-                viewSource
+                ViralAIWorks
               </span>
             </a>
           </div>

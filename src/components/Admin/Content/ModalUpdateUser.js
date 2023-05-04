@@ -4,9 +4,11 @@ import Modal from "react-bootstrap/Modal";
 import { FcPlus } from "react-icons/fc";
 import { ToastContainer, toast } from "react-toastify";
 import { postCreateNewUser } from "../../../services/apiService";
+import { useEffect } from "react";
+import _ from "lodash";
 
-const ModalCreateUser = (props) => {
-  const { show, setShow } = props;
+const ModalUpdateUser = (props) => {
+  const { show, setShow, dataUpdate } = props;
   const handleClose = () => {
     setShow(false);
     setEmail("");
@@ -16,6 +18,19 @@ const ModalCreateUser = (props) => {
     setImage("");
     setPreviewImage("");
   };
+
+  useEffect(() => {
+    if (!_.isEmpty(dataUpdate)) {
+      setEmail(dataUpdate.email);
+      setUsername(dataUpdate.username);
+      setRole(dataUpdate.role);
+      setImage("");
+      if (dataUpdate.image) {
+        setPreviewImage(`data:image/jpeg;base64,${dataUpdate.image}`);
+      }
+    }
+  }, [dataUpdate]);
+
   const handleShow = () => setShow(true);
 
   const [email, setEmail] = useState("");
@@ -75,7 +90,7 @@ const ModalCreateUser = (props) => {
         className="modal-add-user"
       >
         <Modal.Header closeButton>
-          <Modal.Title>Add new user</Modal.Title>
+          <Modal.Title>Update new user</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <form className="row g-3">
@@ -85,6 +100,7 @@ const ModalCreateUser = (props) => {
                 type="email"
                 className="form-control"
                 value={email}
+                disabled
                 onChange={(e) => setEmail(e.target.value)}
               />
             </div>
@@ -94,6 +110,7 @@ const ModalCreateUser = (props) => {
                 type="password"
                 className="form-control"
                 value={password}
+                disabled
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
@@ -151,4 +168,4 @@ const ModalCreateUser = (props) => {
     </>
   );
 };
-export default ModalCreateUser;
+export default ModalUpdateUser;

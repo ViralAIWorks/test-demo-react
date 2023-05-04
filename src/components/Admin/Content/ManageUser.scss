@@ -4,6 +4,12 @@
   .users-content {
     .btn-add-new {
       margin: 15px 0;
+
+      .btn-primary {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
     }
   }
 

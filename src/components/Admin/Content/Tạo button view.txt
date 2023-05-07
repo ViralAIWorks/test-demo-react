@@ -1,0 +1,26 @@
+Tạo button view: (Theo cách hiểu)
+
+1. event onClick cho button 'View' - TableUser. Ko thế xử lí sự kiện ngay tại tab này vì ko thể tương tác với bản thiết kế được tạo bên ModalViewUser. Do đó phải có props.
+
+2. Component cha là ManageUser, tại đây tạo 2 useState: 
+- useState display bản thiết kế với initvalue=false
+	showModalViewUser
+- useState để sử dụng data với initvalue = object rỗng
+	dataView
+Sau đó tạo const 'handleClickBtnView' với tham số là user và dán 2 useState đã tạo và sử dụng setShowModalViewUser(true) để display bản thiết kế, setDataView(user) để lấy data.
+
+Để có thể truyền từ parent -> child:
+<TableUser handleClickBtnView={handleClickBtnView}/>
+và 
+<ModelViewUser 
+	show={showModalViewUser}
+	setShow={setShowModalViewUser}
+	dataView={dataView}/>
+(ModelViewUser sẽ được truyền 3 props: show, setShow, dataView, show và setShow: visibility of modal, dataView để truyền data/information cho component này để render) 
+
+3. Quay về component đã tạo bản thiết kế (tham số props)
+(Tùy chọn: gán 3 props: const {show,setShow,dataView} = props)
+Ví dụ nếu muốn hiện email trong data, ngay tại chỗ cần hiện: {dataView && dataView.email ? dataView.email : ''}
+
+
+End!

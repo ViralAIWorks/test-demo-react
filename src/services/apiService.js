@@ -42,6 +42,7 @@ const postLogin = (email, password) => {
     {
       email,
       password,
+      delay: 5000,
     }
     //OR {
     //   email:email, password:password

@@ -9,7 +9,7 @@ const Question = (props) => {
 
   const handleHandleCheckbox = (e, aId, qId) => {
     // console.log('>>Check: ', e.target.checked);
-    console.log('>>Check data props: ', aId, qId);
+    // console.log('>>Check data props: ', aId, qId);
     props.handleCheckbox(aId, qId);
   };
 
@@ -36,9 +36,7 @@ const Question = (props) => {
                     className='form-check-input'
                     type='checkbox'
                     checked={a.isSelected}
-                    onChange={(e) =>
-                      handleHandleCheckbox(e, a.id, data.questionId)
-                    }
+                    onChange={(e) => handleHandleCheckbox(e, a.id, data.questionId)}
                   />
                   <label className='form-check-label'>{a.description}</label>
                 </div>

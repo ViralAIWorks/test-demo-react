@@ -1,10 +1,9 @@
-import React, { useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
-import { getDataQuiz } from '../../services/apiService';
 import _ from 'lodash';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import { getDataQuiz } from '../../services/apiService';
 import './DetailQuiz.scss';
 import Question from './Question';
-import { useState } from 'react';
 
 const DetailQuiz = (props) => {
   const params = useParams();
@@ -20,7 +19,6 @@ const DetailQuiz = (props) => {
 
   const fetchQuestions = async () => {
     let res = await getDataQuiz(quizId);
-    console.log('>>>check question: ', res);
     if (res && res.EC === 0) {
       let raw = res.DT;
       let data = _.chain(raw)
@@ -42,11 +40,10 @@ const DetailQuiz = (props) => {
           return { questionId: key, answers, questionDescription, image };
         })
         .value();
-      console.log(data);
+      // console.log(data);
       setDataQuiz(data);
     }
   };
-  console.log('>>check dataQuiz: ', dataQuiz);
 
   const handlePrev = () => {
     if (index - 1 < 0) return;
@@ -56,24 +53,58 @@ const DetailQuiz = (props) => {
     if (dataQuiz && dataQuiz.length > index + 1) setIndex(index + 1);
   };
 
+  const handleFinishQuiz = () => {
+    //   {
+    //     "quizId": 1,
+    //     "answers": [
+    //         {
+    //             "questionId": 1,
+    //             "userAnswerId": [3]
+    //         },
+    //         {
+    //             "questionId": 2,
+    //             "userAnswerId": [6]
+    //         }
+    //     ]
+    // }
+    console.log('>>Check dt before submit: ', dataQuiz);
+    let payload = {
+      quizId: +quizId,
+      answers: [],
+    };
+    let answers = [];
+    if (dataQuiz && dataQuiz.length > 0) {
+      dataQuiz.forEach((question) => {
+        let questionId = question.questionId;
+        let userAnswerId = [];
+
+        question.answers.forEach((a) => {
+          if (a.isSelected) {
+            userAnswerId.push(a.id);
+          }
+        });
+        answers.push({
+          questionId: +questionId,
+          userAnswerId: userAnswerId,
+        });
+      });
+      payload.answers = answers;
+      console.log('final payload: ', payload);
+    }
+  };
+
   const handleCheckbox = (answerId, questionId) => {
     let dataQuizClone = _.cloneDeep(dataQuiz);
-    let question = dataQuizClone.find(
-      (item) => +item.questionId === +questionId
-    );
+    let question = dataQuizClone.find((item) => +item.questionId === +questionId);
     if (question && question.answers) {
-      let b = question.answers.map((item) => {
+      question.answers = question.answers.map((item) => {
         if (+item.id === +answerId) {
           item.isSelected = !item.isSelected;
         }
         return item;
       });
-      question.answers = b;
-      // console.log(b);
     }
-    let index = dataQuizClone.findIndex(
-      (item) => +item.questionId === +questionId
-    );
+    let index = dataQuizClone.findIndex((item) => +item.questionId === +questionId);
     if (index > -1) {
       dataQuizClone[index] = question;
       setDataQuiz(dataQuizClone);
@@ -104,7 +135,7 @@ const DetailQuiz = (props) => {
           <button className='btn btn-primary' onClick={() => handleNext()}>
             Next
           </button>
-          <button className='btn btn-warning' onClick={() => handleNext()}>
+          <button className='btn btn-warning' onClick={() => handleFinishQuiz()}>
             Finish
           </button>
         </div>

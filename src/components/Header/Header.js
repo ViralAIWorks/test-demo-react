@@ -1,9 +1,9 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from "react-bootstrap/NavDropdown";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Header = () => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
@@ -11,27 +11,27 @@ const Header = () => {
 
   const navigate = useNavigate();
   const handleLogin = () => {
-    navigate("/login");
+    navigate('/login');
   };
   const handleRegister = () => {
-    navigate("/register");
+    navigate('/register');
   };
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg='light' expand='lg'>
       <Container>
-        <NavLink className="navbar-brand" to="/">
-          Good Learners
+        <NavLink className='navbar-brand' to='/'>
+          Viral AI Works
         </NavLink>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="me-auto">
-            <NavLink to="/" className="nav-link">
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Navbar.Collapse id='basic-navbar-nav'>
+          <Nav className='me-auto'>
+            <NavLink to='/' className='nav-link'>
               Home
             </NavLink>
-            <NavLink to="/users" className="nav-link">
+            <NavLink to='/users' className='nav-link'>
               User
             </NavLink>
-            <NavLink to="/admins" className="nav-link">
+            <NavLink to='/admins' className='nav-link'>
               Admin
             </NavLink>
             {/* <Nav.Link href="/">Home</Nav.Link>
@@ -42,7 +42,7 @@ const Header = () => {
             {isAuthenticated === false ? (
               <>
                 <button
-                  className="btn-login"
+                  className='btn-login'
                   onClick={() => {
                     handleLogin();
                   }}
@@ -50,7 +50,7 @@ const Header = () => {
                   Log in
                 </button>
                 <button
-                  className="btn-signup"
+                  className='btn-signup'
                   onClick={() => {
                     handleRegister();
                   }}
@@ -59,7 +59,7 @@ const Header = () => {
                 </button>
               </>
             ) : (
-              <NavDropdown title="Settings" id="basic-nav-dropdown">
+              <NavDropdown title='Settings' id='basic-nav-dropdown'>
                 <NavDropdown.Item>Log Out</NavDropdown.Item>
                 <NavDropdown.Item>Profile</NavDropdown.Item>
               </NavDropdown>

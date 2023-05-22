@@ -1,15 +1,16 @@
 // import React from 'react';
-import ReactDOM from "react-dom/client";
-import reportWebVitals from "./reportWebVitals";
-import { Provider } from "react-redux";
-import { store, persistor } from "./redux/store";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "./Layout";
-import "nprogress/nprogress.css";
-import { PersistGate } from "redux-persist/integration/react";
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'nprogress/nprogress.css';
+import ReactDOM from 'react-dom/client';
+import 'react-perfect-scrollbar/dist/css/styles.css';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+import { PersistGate } from 'redux-persist/integration/react';
+import Layout from './Layout';
+import { persistor, store } from './redux/store';
+import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>

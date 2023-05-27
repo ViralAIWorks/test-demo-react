@@ -19,7 +19,7 @@ const Header = () => {
   return (
     <Navbar bg='light' expand='lg'>
       <Container>
-        <NavLink className='navbar-brand' to='/'>
+        <NavLink style={{ cursor: 'pointer' }} className='navbar-brand' to='/'>
           Viral AI Works
         </NavLink>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />

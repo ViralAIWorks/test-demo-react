@@ -44,7 +44,9 @@ const Sidebar = (props) => {
             }}
           >
             <DiReact size={'3em'} color={'00bfff'} />
-            <span onClick={() => navigate('/')}>Viral AI Works</span>
+            <span style={{ cursor: 'pointer' }} onClick={() => navigate('/')}>
+              Viral AI Works
+            </span>
           </div>
         </SidebarHeader>
 

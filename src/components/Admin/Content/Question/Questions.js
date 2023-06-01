@@ -7,6 +7,7 @@ import Lightbox from 'react-awesome-lightbox';
 import { AiFillPlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
 import { BsPatchMinusFill, BsPatchPlusFill } from 'react-icons/bs';
 import { RiImageAddFill } from 'react-icons/ri';
+import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 import {
   getAllQuizForAdmin,
@@ -15,6 +16,22 @@ import {
 } from '../../../../services/apiService';
 
 function Questions(props) {
+  const initQuestions = [
+    {
+      id: uuidv4(),
+      description: '',
+      imageFile: '',
+      imageName: '',
+      answers: [
+        {
+          id: uuidv4(),
+          description: '',
+          isCorrect: false,
+        },
+      ],
+    },
+  ];
+
   const [isPreviewImage, setIsPreviewImage] = useState(false);
   const [dataImagePreview, setDataImagePreview] = useState({
     title: '',
@@ -42,21 +59,7 @@ function Questions(props) {
   };
 
   // Fake Data
-  const [questions, setQuestions] = useState([
-    {
-      id: uuidv4(),
-      description: '',
-      imageFile: '',
-      imageName: '',
-      answers: [
-        {
-          id: uuidv4(),
-          description: '',
-          isCorrect: false,
-        },
-      ],
-    },
-  ]);
+  const [questions, setQuestions] = useState(initQuestions);
 
   // console.log('check questions: ', questions);
 
@@ -152,25 +155,76 @@ function Questions(props) {
   const handleSubmitQuestionForQuiz = async () => {
     // todo
     // validate data
-
-    console.log('question: ', questions, selectedQuiz);
     // Submit questions
-    await Promise.all(
-      questions.map(async (question) => {
-        const q = await postCreateNewQuesionForQuiz(
-          +selectedQuiz.value,
-          question.description,
-          question.imageFile,
+    // await Promise.all(
+    //   questions.map(async (question) => {
+    //     const q = await postCreateNewQuesionForQuiz(
+    //       +selectedQuiz.value,
+    //       question.description,
+    //       question.imageFile,
 
-          //Submit answers
-          await Promise.all(
-            question.answers.map(async (answer) => {
-              await postCreateNewAnswerForQuestion(answer.description, answer.isCorrect, q.DT.id);
-            })
-          )
-        );
-      })
-    );
+    //       //Submit answers
+    //       await Promise.all(
+    //         question.answers.map(async (answer) => {
+    //           await postCreateNewAnswerForQuestion(answer.description, answer.isCorrect, q.DT.id);
+    //         })
+    //       )
+    //     );
+    //   })
+    // );
+    if (_.isEmpty(selectedQuiz)) {
+      toast.error('Please choose a Quiz!');
+      return;
+    }
+    //validate answer
+    let isValidAnswer = true;
+    let indexQ = 0,
+      indexA = 0;
+    for (let i = 0; i < questions.length; i++) {
+      for (let j = 0; j < questions[i].answers.length; j++) {
+        if (!questions[i].answers[j].description) {
+          isValidAnswer = false;
+          indexA = j;
+          break;
+        }
+      }
+      indexQ = i;
+      if (isValidAnswer === false) break;
+    }
+
+    if (isValidAnswer === false) {
+      toast.error(`Not empty: Answer ${indexA + 1} at Question ${indexQ + 1}`);
+      return;
+    }
+    //validate question
+    let isValidQ = true;
+    let indexQ1 = 0;
+    for (let i = 0; i < questions.length; i++) {
+      if (!questions[i].description) {
+        isValidQ = false;
+        indexQ1 = i;
+        break;
+      }
+    }
+    if (isValidQ === false) {
+      toast.error(`Not empty description for Question ${indexQ1 + 1}`);
+      return;
+    }
+
+    //validate data
+    for (const question of questions) {
+      const q = await postCreateNewQuesionForQuiz(
+        +selectedQuiz.value,
+        question.description,
+        question.imageFile
+      );
+      // submit answer
+      for (const answer of question.answers) {
+        await postCreateNewAnswerForQuestion(answer.description, answer.isCorrect, q.DT.id);
+      }
+    }
+    toast.success('Create questions and answers succeed!');
+    setQuestions(initQuestions);
   };
 
   const handlePreviewImage = (questionId) => {

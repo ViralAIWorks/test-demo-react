@@ -123,15 +123,15 @@ function QuizQA(props) {
       setQuestions([...questions, newQuestion]);
     }
     if (type === 'REMOVE') {
-      let questionClone = _.cloneDeep(questions);
+      let questionsClone = _.cloneDeep(questions);
 
-      questionClone = questionClone.filter((item) => item.id !== id);
-      setQuestions(questionClone);
+      questionsClone = questionsClone.filter((item) => item.id !== id);
+      setQuestions(questionsClone);
     }
   };
 
   const handleAddRemoveAnswer = (type, questionId, answerId) => {
-    let questionClone = _.cloneDeep(questions);
+    let questionsClone = _.cloneDeep(questions);
     if (type === 'ADD') {
       const newAnswer = {
         id: uuidv4(),
@@ -139,45 +139,45 @@ function QuizQA(props) {
         isCorrect: false,
       };
 
-      let index = questionClone.findIndex((item) => item.id === questionId);
-      questionClone[index].answers.push(newAnswer);
-      setQuestions(questionClone);
+      let index = questionsClone.findIndex((item) => item.id === questionId);
+      questionsClone[index].answers.push(newAnswer);
+      setQuestions(questionsClone);
     }
     if (type === 'REMOVE') {
-      let index = questionClone.findIndex((item) => item.id === questionId);
-      questionClone[index].answers = questionClone[index].answers.filter(
+      let index = questionsClone.findIndex((item) => item.id === questionId);
+      questionsClone[index].answers = questionsClone[index].answers.filter(
         (item) => item.id !== answerId
       );
-      setQuestions(questionClone);
+      setQuestions(questionsClone);
     }
   };
 
   const handleOnChange = (type, questionId, value) => {
     if (type === 'QUESTION') {
-      let questionClone = _.cloneDeep(questions);
-      let index = questionClone.findIndex((item) => item.id === questionId);
+      let questionsClone = _.cloneDeep(questions);
+      let index = questionsClone.findIndex((item) => item.id === questionId);
       if (index > -1) {
-        questionClone[index].description = value;
-        setQuestions(questionClone);
+        questionsClone[index].description = value;
+        setQuestions(questionsClone);
       }
     }
   };
 
   const handleOnChangeFileQuestion = (questionId, e) => {
-    let questionClone = _.cloneDeep(questions);
-    let index = questionClone.findIndex((item) => item.id === questionId);
+    let questionsClone = _.cloneDeep(questions);
+    let index = questionsClone.findIndex((item) => item.id === questionId);
     if (index > -1 && e.target && e.target.files && e.target.files[0]) {
-      questionClone[index].imageFile = e.target.files[0];
-      questionClone[index].imageName = e.target.files[0].name;
-      setQuestions(questionClone);
+      questionsClone[index].imageFile = e.target.files[0];
+      questionsClone[index].imageName = e.target.files[0].name;
+      setQuestions(questionsClone);
     }
   };
 
   const handleAnswerQuestion = (type, answerId, questionId, value) => {
-    let questionClone = _.cloneDeep(questions);
-    let index = questionClone.findIndex((item) => item.id === questionId);
+    let questionsClone = _.cloneDeep(questions);
+    let index = questionsClone.findIndex((item) => item.id === questionId);
     if (index > -1) {
-      questionClone[index].answers = questionClone[index].answers.map((answer) => {
+      questionsClone[index].answers = questionsClone[index].answers.map((answer) => {
         if (answer.id === answerId) {
           if (type === 'CHECKBOX') {
             answer.isCorrect = value;
@@ -189,7 +189,7 @@ function QuizQA(props) {
         return answer;
       });
 
-      setQuestions(questionClone);
+      setQuestions(questionsClone);
     }
   };
 
@@ -253,15 +253,16 @@ function QuizQA(props) {
     }
 
     //validate data
-    let questionClone = _.cloneDeep(questions);
-    for (let i = 0; i < questionClone.length; i++) {
-      if (questionClone[i].imageFile) {
-        questionClone[i].imageFile = await toBase64(questionClone[i].imageFile);
+    let questionsClone = _.cloneDeep(questions);
+    for (let i = 0; i < questionsClone.length; i++) {
+      if (questionsClone[i].imageFile) {
+        questionsClone[i].imageFile = await toBase64(questionsClone[i].imageFile);
       }
     }
+
     let res = await postUpsertQA({
       quizId: selectedQuiz.value,
-      questions: questionClone,
+      questions: questionsClone,
     });
 
     if (res && res.EC === 0) {
@@ -280,12 +281,12 @@ function QuizQA(props) {
     });
 
   const handlePreviewImage = (questionId) => {
-    let questionClone = _.cloneDeep(questions);
-    let index = questionClone.findIndex((item) => item.id === questionId);
+    let questionsClone = _.cloneDeep(questions);
+    let index = questionsClone.findIndex((item) => item.id === questionId);
     if (index > -1) {
       setDataImagePreview({
-        url: URL.createObjectURL(questionClone[index].imageFile),
-        title: questionClone[index].imageName,
+        url: URL.createObjectURL(questionsClone[index].imageFile),
+        title: questionsClone[index].imageName,
       });
       setIsPreviewImage(true);
     }

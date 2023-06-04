@@ -92,7 +92,7 @@ const ModalUpdateQuiz = (props) => {
         <Modal.Header closeButton>
           <Modal.Title>Update quiz</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        {/* <Modal.Body>
           <form className='row g-3'>
             <div className='col-md-6'>
               <label className='form-label'>Name</label>
@@ -148,7 +148,8 @@ const ModalUpdateQuiz = (props) => {
           <Button variant='primary' onClick={handleSubmitQuiz}>
             Save
           </Button>
-        </Modal.Footer>
+        </Modal.Footer> */}
+        Features in development
       </Modal>
     </>
   );

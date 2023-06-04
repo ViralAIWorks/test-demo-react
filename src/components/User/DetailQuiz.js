@@ -5,6 +5,7 @@ import { getDataQuiz, postSubmitQuiz } from '../../services/apiService';
 import './DetailQuiz.scss';
 import Question from './Question';
 import ModelResult from './ModalResult';
+import RightContent from './Content/RightContent';
 
 const DetailQuiz = (props) => {
   const params = useParams();
@@ -143,7 +144,9 @@ const DetailQuiz = (props) => {
           </button>
         </div>
       </div>
-      <div className='right-content'>Count down</div>
+      <div className='right-content'>
+        <RightContent dataQuiz={dataQuiz} handleFinishQuiz={handleFinishQuiz} />
+      </div>
       <ModelResult
         show={isShowModalResult}
         setShow={setIsShowModalResult}

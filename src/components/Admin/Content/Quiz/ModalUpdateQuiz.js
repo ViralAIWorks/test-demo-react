@@ -149,7 +149,9 @@ const ModalUpdateQuiz = (props) => {
             Save
           </Button>
         </Modal.Footer> */}
-        Features in development
+        <div class='card text-warning bg-dark'>
+          <div class='card-body mx-auto my-auto '>Feature is under development.</div>
+        </div>
       </Modal>
     </>
   );

@@ -14,7 +14,6 @@ import Register from './components/Auth/Register';
 import HomePage from './components/Home/HomePage';
 import DetailQuiz from './components/User/DetailQuiz';
 import ListQuiz from './components/User/ListQuiz';
-import Test1 from './routes/Test1';
 import PrivateRoute from './routes/PrivateRoute';
 
 const NotFound = () => {

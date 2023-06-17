@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import "./Login.scss";
-import { useNavigate } from "react-router-dom";
-import { postLogin } from "../../services/apiService";
-import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { doLogin } from "../../redux/action/userAction";
-import { ImSpinner9 } from "react-icons/im";
+import React, { useState } from 'react';
+import './Login.scss';
+import { useNavigate } from 'react-router-dom';
+import { postLogin } from '../../services/apiService';
+import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { doLogin } from '../../redux/action/userAction';
+import { ImSpinner9 } from 'react-icons/im';
 
 const Login = (props) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,11 +27,11 @@ const Login = (props) => {
     //validate
     const isValidEmail = validateEmail(email);
     if (!isValidEmail) {
-      toast.error("Invalid Email!");
+      toast.error('Invalid Email!');
       return;
     }
     if (!password) {
-      toast.error("Invalid Password!");
+      toast.error('Invalid Password!');
     }
     setIsLoading(true);
     //submit apis
@@ -40,7 +40,7 @@ const Login = (props) => {
       dispatch(doLogin(data));
       toast.success(data.EM);
       setIsLoading(false);
-      navigate("/");
+      navigate('/');
     }
 
     if (data && +data.EC !== 0) {
@@ -49,56 +49,59 @@ const Login = (props) => {
     }
   };
 
+  const handleKeyDown = (e) => {
+    if (e && e.key === 'Enter') {
+      handleLogin();
+    }
+  };
+
   return (
-    <div className="login-container">
-      <div className="header">
+    <div className='login-container'>
+      <div className='header'>
         <span>Don't have an account yet?</span>
         <button
           onClick={() => {
-            navigate("/register");
+            navigate('/register');
           }}
         >
           Sign up
         </button>
       </div>
-      <div className="title col-4 mx-auto">Good Learners</div>
-      <div className="welcome col-4 mx-auto">Hello, who's this?</div>
-      <div className="content-form col-4 mx-auto">
-        <div className="form-group">
+      <div className='title col-4 mx-auto'>Good Learners</div>
+      <div className='welcome col-4 mx-auto'>Hello, who's this?</div>
+      <div className='content-form col-4 mx-auto'>
+        <div className='form-group'>
           <label>Email</label>
           <input
-            type={"email"}
-            className="form-control"
+            type={'email'}
+            className='form-control'
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
         </div>
-        <div className="form-group">
+        <div className='form-group'>
           <label>Password</label>
           <input
-            type={"password"}
-            className="form-control"
+            type={'password'}
+            className='form-control'
             value={password}
             onChange={(event) => setPassword(event.target.value)}
+            onKeyDown={(e) => handleKeyDown(e)}
           />
         </div>
-        <span className="forgot-password">Forgot password?</span>
+        <span className='forgot-password'>Forgot password?</span>
         <div>
-          <button
-            className="btn-submit"
-            onClick={() => handleLogin()}
-            disabled={isLoading}
-          >
-            {isLoading === true && <ImSpinner9 className="loader-icon" />}
+          <button className='btn-submit' onClick={() => handleLogin()} disabled={isLoading}>
+            {isLoading === true && <ImSpinner9 className='loader-icon' />}
 
             <span> Login to Good Learners</span>
           </button>
         </div>
-        <div className="text-center">
+        <div className='text-center'>
           <span
-            className="back"
+            className='back'
             onClick={() => {
-              navigate("/");
+              navigate('/');
             }}
           >
             &#60;&#60; Go to Homepage

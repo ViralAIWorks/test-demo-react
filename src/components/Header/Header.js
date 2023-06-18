@@ -7,8 +7,11 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { doLogout } from '../../redux/action/userAction';
 import { logout } from '../../services/apiService';
+import Language from './Language';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
+  const { t } = useTranslation();
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const account = useSelector((state) => state.user.account);
 
@@ -43,13 +46,13 @@ const Header = () => {
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
             <NavLink to='/' className='nav-link'>
-              Home
+              {t('navbar.home')}
             </NavLink>
             <NavLink to='/users' className='nav-link'>
-              User
+              {t('navbar.user')}
             </NavLink>
             <NavLink to='/admins' className='nav-link'>
-              Admin
+              {t('navbar.admin')}
             </NavLink>
             {/* <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/users">User</Nav.Link>
@@ -64,7 +67,7 @@ const Header = () => {
                     handleLogin();
                   }}
                 >
-                  Log in
+                  {t('navbar.login')}
                 </button>
                 <button
                   className='btn-signup'
@@ -72,15 +75,16 @@ const Header = () => {
                     handleRegister();
                   }}
                 >
-                  Sign up
+                  {t('navbar.signup')}
                 </button>
               </>
             ) : (
-              <NavDropdown title='Settings' id='basic-nav-dropdown'>
+              <NavDropdown title={t('navbar.settings')} id='basic-nav-dropdown'>
                 <NavDropdown.Item>Profile</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => handleLogOut()}>Log Out</NavDropdown.Item>
               </NavDropdown>
             )}
+            <Language />
           </Nav>
         </Navbar.Collapse>
       </Container>

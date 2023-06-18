@@ -1,0 +1,26 @@
+{
+  "homepage": {
+    "title1": "There's a better way to ask...",
+    "title2": "Unleash the power of personalized discovery with our captivating quiz. Explore your passions, uncover hidden talents, and receive tailored recommendations that align with your unique traits. Dive into an immersive experience that will leave you inspired and ready to embark on exciting new ventures.",
+    "title3": {
+      "login": "Get started - It's free"
+    },
+    "doQuiz": "Doing Quiz Now"
+  },
+  "navbar": {
+    "home": "Home",
+    "user": "User",
+    "admin": "Admin",
+    "login": "Log in",
+    "signup": "Sign up",
+    "settings": "Settings"
+  },
+  "login-page": {
+    "account": "Don't have an account yet?",
+    "greetings": "Hello, who's this?",
+    "password": "Password",
+    "forgot": "Forgot password?",
+    "toHomepage": "Go to Homepage",
+    "loginTo": "Login to Viral AI Works"
+  }
+}

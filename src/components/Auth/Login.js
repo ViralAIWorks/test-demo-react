@@ -6,8 +6,11 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { doLogin } from '../../redux/action/userAction';
 import { ImSpinner9 } from 'react-icons/im';
+import Language from '../Header/Language';
+import { useTranslation } from 'react-i18next';
 
 const Login = (props) => {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
@@ -58,17 +61,18 @@ const Login = (props) => {
   return (
     <div className='login-container'>
       <div className='header'>
-        <span>Don't have an account yet?</span>
+        <span>{t('login-page.account')}</span>
         <button
           onClick={() => {
             navigate('/register');
           }}
         >
-          Sign up
+          {t('navbar.signup')}
         </button>
+        <Language />
       </div>
-      <div className='title col-4 mx-auto'>Good Learners</div>
-      <div className='welcome col-4 mx-auto'>Hello, who's this?</div>
+      <div className='title col-4 mx-auto'>Viral AI Works</div>
+      <div className='welcome col-4 mx-auto'>{t('login-page.greetings')}</div>
       <div className='content-form col-4 mx-auto'>
         <div className='form-group'>
           <label>Email</label>
@@ -80,7 +84,7 @@ const Login = (props) => {
           />
         </div>
         <div className='form-group'>
-          <label>Password</label>
+          <label>{t('login-page.password')}</label>
           <input
             type={'password'}
             className='form-control'
@@ -89,12 +93,12 @@ const Login = (props) => {
             onKeyDown={(e) => handleKeyDown(e)}
           />
         </div>
-        <span className='forgot-password'>Forgot password?</span>
+        <span className='forgot-password'>{t('login-page.forgot')}</span>
         <div>
           <button className='btn-submit' onClick={() => handleLogin()} disabled={isLoading}>
             {isLoading === true && <ImSpinner9 className='loader-icon' />}
 
-            <span> Login to Good Learners</span>
+            <span> {t('login-page.loginTo')}</span>
           </button>
         </div>
         <div className='text-center'>
@@ -104,7 +108,7 @@ const Login = (props) => {
               navigate('/');
             }}
           >
-            &#60;&#60; Go to Homepage
+            &#60;&#60; {t('login-page.toHomepage')}
           </span>
         </div>
       </div>

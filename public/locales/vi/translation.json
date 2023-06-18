@@ -1,0 +1,26 @@
+{
+  "homepage": {
+    "title1": "Có rất nhiều cách để hỏi...",
+    "title2": "Giải phóng sức mạnh của khám phá cá nhân với các câu đố hấp dẫn của chúng tôi. Khám phá niềm đam mê của bạn, khám phá những tài năng tiềm ẩn và nhận được các đề xuất phù hợp với đặc điểm độc đáo của bạn. Đắm chìm trong những trải nghiệm nhập vai sẽ truyền cảm hứng cho bạn và chuẩn bị cho một sự nghiệp mới thú vị.",
+    "title3": {
+      "login": "Bắt đầu - Hoàn toàn miễn phí"
+    },
+    "doQuiz": "Kiểm tra ngay bây giờ"
+  },
+  "navbar": {
+    "home": "Trang chủ",
+    "user": "Người dùng",
+    "admin": "Quản trị viên",
+    "login": "Đăng nhập",
+    "signup": "Tạo tài khoản",
+    "settings": "Cài đặt"
+  },
+  "login-page": {
+    "account": "Bạn chưa có tài khoản?",
+    "greetings": "Xin chào, ai đây?",
+    "password": "Mật khẩu",
+    "forgot": "Quên mật khẩu?",
+    "toHomepage": "Về trang chủ",
+    "loginTo": "Đăng nhập vào Viral AI Works"
+  }
+}
